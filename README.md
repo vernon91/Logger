@@ -1,18 +1,19 @@
 # Logger
 KCV Logger Plug-In
 
-Logger Plug-in from @Yuubari
+Credit:
+Original logger source code from @Yuubari
 
-A plug-in used to log the following in .csv files:
+A plug-in used in KanColleViewer(KCV) to log the following in .csv files:
 - Developement
 - Construction
-- Ship Drop
+- Ship Drops
 - Battle
 - Material
 - Expedition
 
-The additional fucntion added: 
+The additional fucntions added: 
 - Expedtion Log
 - Combined Fleet Battle Log
 
-I'm just adding the addtional fucntion that I need which is missing from @Yuubari's
+Mini personal project just for learning purposes while adding the additional functions that I need which is missing from @Yuubari's
