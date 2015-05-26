@@ -140,7 +140,7 @@ namespace Logger
 
 		public string TimestampISO()
 		{
-			return DateTime.UtcNow.ToString("o");
+			return DateTime.UtcNow.ToLocalTime().ToString("o");
 		}
 	}
 
@@ -284,13 +284,23 @@ namespace Logger
 
         private void ExpedResult(kcsapi_mission_result exped)
         {
+            string exped_result;
 
             if (exped.api_ship_id == null)
                 return;
 
-            Log(this.TimestampISO(),
+            // Change the expedition result to Japanese
+            if (exped.api_clear_result == 2)
+                exped_result = "大成功";
+            else if (exped.api_clear_result == 1)
+                exped_result = "成功";
+            else
+                exped_result = "失敗";
+
+            Log("{0},{1},{2},{3},{4},{5},{6}", 
+                this.TimestampISO(),
                 exped.api_quest_name,
-                exped.api_clear_result,
+                exped_result,
                 exped.api_get_material[0],
                 exped.api_get_material[1],
                 exped.api_get_material[2],
