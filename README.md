@@ -15,7 +15,6 @@ Logger source code from [@Yuubari](https://github.com/Yuubari/KanColleViewer/tre
 - Ship Drops
 - Battle
 - Materials
-- Expedition
 
 **Additional Functions** added: 
 - Expedtion Log
