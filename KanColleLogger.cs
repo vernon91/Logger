@@ -9,38 +9,37 @@ using Grabacr07.KanColleWrapper;
 
 namespace Logger
 {
-	[Export(typeof(IToolPlugin))]
-	[ExportMetadata("Title", "KanColleLogger")]
-	[ExportMetadata("Description", "File logging back-end")]
-	[ExportMetadata("Version", "1.0")]
-	[ExportMetadata("Author", "@Xiatian")]
-	public class KanColleLogger : IToolPlugin
-	{
-		private readonly LoggerViewModel viewmodel = new LoggerViewModel
-		{
-			Loggers = new ObservableCollection<LoggerBase>
-			{
-				new ItemLog(KanColleClient.Current.Proxy),
-				new ConstructionLog(KanColleClient.Current.Proxy),
-				new BattleLog(KanColleClient.Current.Proxy),
-				new MaterialsLog(KanColleClient.Current.Proxy),
-                new ExpedLog(KanColleClient.Current.Proxy),
-			}
-		};
+    [Export(typeof(IPlugin))]
+    [Export(typeof(ITool))]
+    [Export(typeof(IRequestNotify))]
+    [ExportMetadata("Guid", "093cf965-6eb2-b27e-46de-c60b1201e48a")]
+    [ExportMetadata("Title", "KanColleLogger")]
+    [ExportMetadata("Description", "File logging back-end")]
+	[ExportMetadata("Version", "1.0.1")]
+	[ExportMetadata("Author", "@Vernon")]
+	public class KanColleLogger : IPlugin, ITool, IRequestNotify
+    {
+        private LoggerViewModel viewModel;
 
-		public string ToolName
-		{
-			get { return "Logger"; }
-		}
+        string ITool.Name => "Logger";
 
-		public object GetSettingsView()
-		{
-			return null;
-		}
+        object ITool.View => new LoggerView { DataContext = this.viewModel, };
 
-		public object GetToolView()
-		{
-			return new LoggerView { DataContext = this.viewmodel, };
-		}
+        public event EventHandler<NotifyEventArgs> NotifyRequested;
+
+        public void Initialize()
+        {
+            this.viewModel = new LoggerViewModel
+            {
+                Loggers = new ObservableCollection<LoggerBase>
+                {
+                    new ItemLog(KanColleClient.Current.Proxy),
+                    new ConstructionLog(KanColleClient.Current.Proxy),
+                    new BattleLog(KanColleClient.Current.Proxy),
+                    new MaterialsLog(KanColleClient.Current.Proxy),
+                    new ExpedLog(KanColleClient.Current.Proxy),
+                }
+            };
+        }
 	}
 }

@@ -29,9 +29,5 @@ namespace Logger
 		}
 
 		#endregion
-
-		public LoggerViewModel()
-		{
-		}
 	}
 }
